@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ANIME NO KOWAI: catálogo temático de 6 animes de terror, suspenso y horror psicológico.">
+  <title>ANIME NO KOWAI — Anime de Terror</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Creepster&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section class="blood-line"></section>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top nk-navbar">
+    <section class="container">
+      <a class="navbar-brand nk-brand d-flex align-items-center" href="#inicio" aria-label="ANIME NO KOWAI inicio">
+        <img src="assets/logo-anime-no-kowai.png" class="brand-logo" alt="Logotipo ANIME NO KOWAI">
+        <span>ANIME NO KOWAI</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <section class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#top6">Top 6</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#galeria">Galería & Tráilers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-danger btn-sm ms-lg-2" href="admin.html">
+              <i class="bi bi-shield-lock"></i> Admin
+            </a>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </nav>
+
+  <header id="inicio" class="hero-section">
+    <section class="hero-overlay"></section>
+    <section class="container hero-content">
+      <span class="eyebrow">HORROR · SUSPENSO · MISTERIO</span>
+      <h1>ANIME <span>NO KOWAI</span></h1>
+      <p class="lead">Un catálogo interactivo dedicado a seis historias que convierten el misterio, el horror psicológico y lo sobrenatural en una experiencia inolvidable.</p>
+      <section class="hero-actions">
+        <a class="btn btn-danger btn-lg" href="#top6"><i class="bi bi-eye"></i> Explorar Top 6</a>
+        <a class="btn btn-outline-light btn-lg" href="#contacto"><i class="bi bi-chat-square-text"></i> Opinar</a>
+      </section>
+      <section class="hero-stats row g-3 mt-4">
+        <section class="col-4">
+          <section class="stat">
+            <strong>06</strong>
+            <span>ANIMES</span>
+            </section>
+          </section>
+        <section class="col-4">
+          <section class="stat">
+            <strong>API</strong>
+            <span>JIKAN</span>
+          </section>
+        </section>
+        <section class="col-4">
+          <section class="stat">
+            <strong>100%</strong>
+            <span>RESPONSIVE</span>
+          </section>
+        </section>
+      </section>
+    </section>
+  </header>
+
+  <main>
+    <section id="top6" class="section-shell">
+      <section class="container">
+        <section class="section-heading">
+          <section>
+            <span class="eyebrow">ETAPA 1 · CONTENIDO</span>
+            <h2>Top 6 de Animes de Terror</h2>
+          </section>
+          <p>La información se consulta dinámicamente desde Jikan/MyAnimeList.</p>
+        </section>
+
+        <section class="row g-3 mb-4">
+          <section class="col-12 col-md-8">
+            <label for="searchInput" class="form-label visually-hidden">Buscar anime</label>
+            <section class="search-box">
+              <i class="bi bi-search"></i>
+              <input id="searchInput" type="search" class="form-control" placeholder="Buscar por nombre..." autocomplete="off">
+            </section>
+          </section>
+          <section class="col-12 col-md-4 d-flex align-items-end">
+            <section id="apiStatus" class="status-box w-100"><i class="bi bi-circle-fill"></i> Cargando catálogo...</section>
+          </section>
+        </section>
+
+        <section id="loading" class="loading-state">
+          <section class="spinner-border text-danger" role="status" aria-label="Cargando"></section>
+          <p class="mt-3 mb-0">Despertando las sombras...</p>
+        </section>
+        <section id="animeGrid" class="row g-4" aria-live="polite"></section>
+        <section id="emptyState" class="empty-state d-none">
+          <i class="bi bi-search-heart"></i>
+          <h3>No se encontraron coincidencias</h3>
+          <p>Prueba con otro nombre del catálogo.</p>
+        </section>
+      </section>
+    </section>
+
+    <section id="galeria" class="section-shell section-alt">
+      <section class="container">
+        <section class="section-heading">
+          <section>
+            <span class="eyebrow">ETAPA 3 · DISEÑO</span>
+            <h2>Galería & Tráilers</h2>
+          </section>
+          <p>Selecciona una tarjeta para consultar la ficha técnica, sinopsis y tráiler cuando Jikan lo proporcione.</p>
+        </section>
+        <section id="galleryGrid" class="row g-4"></section>
+      </section>
+    </section>
+
+    <section id="contacto" class="section-shell">
+      <section class="container">
+        <section class="row g-5 align-items-start">
+          <section class="col-lg-5">
+            <span class="eyebrow">ETAPA 5 · RETROALIMENTACIÓN</span>
+            <h2>Cuéntanos qué te dio más miedo.</h2>
+            <p class="muted-copy">Este formulario es una demostración escolar. Los mensajes se guardan únicamente en el navegador para alimentar el panel Admin simulado.</p>
+            <section class="contact-card">
+              <section><i class="bi bi-envelope"></i><span>anime.nokowai.demo@gmail.com</span></section>
+              <section><i class="bi bi-geo-alt"></i><span>León, Guanajuato · México</span></section>
+            </section>
+          </section>
+          <section class="col-lg-7">
+            <form id="contactForm" class="nk-form" novalidate>
+              <section class="row g-3">
+                <section class="col-md-6">
+                  <label for="name" class="form-label">Nombre *</label>
+                  <input id="name" name="name" class="form-control" required maxlength="80">
+                </section>
+                <section class="col-md-6">
+                  <label for="email" class="form-label">Correo *</label>
+                  <input id="email" name="email" type="email" class="form-control" required maxlength="120">
+                </section>
+                <section class="col-12">
+                  <label for="favorite" class="form-label">Anime favorito *</label>
+                  <select id="favorite" name="favorite" class="form-select" required>
+                    <option value="">Selecciona una opción</option>
+                    <option>Another</option>
+                    <option>Shiki</option>
+                    <option>Higurashi no Naku Koro ni</option>
+                    <option>Parasyte -the maxim-</option>
+                    <option>Tokyo Ghoul</option>
+                    <option>Elfen Lied</option>
+                  </select>
+                </section>
+                <section class="col-12">
+                  <label for="message" class="form-label">Mensaje / Opinión *</label>
+                  <textarea id="message" name="message" class="form-control" rows="5" required maxlength="600"></textarea>
+                </section>
+                <section class="col-12 d-flex justify-content-end">
+                  <button class="btn btn-danger btn-lg" type="submit"><i class="bi bi-send"></i> Enviar opinión</button>
+                </section>
+              </section>
+              <section id="formFeedback" class="form-feedback mt-3" role="status"></section>
+            </form>
+          </section>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <footer class="nk-footer">
+    <section class="container d-flex flex-column flex-lg-row justify-content-between gap-2">
+      <section>© 2026 ANIME NO KOWAI · Proyecto académico</section>
+      <section>HTML5 · CSS3 · JavaScript · Bootstrap 5 · Jikan seI</section>
+    </section>
+  </footer>
+
+  <section class="modal fade" id="animeModal" tabindex="-1" aria-hidden="true">
+    <section class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <section class="modal-content nk-modal">
+        <section class="modal-header border-0">
+          <h2 id="modalTitle" class="modal-title"></h2>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </section>
+        <section class="modal-body pt-0">
+          <section class="row g-4">
+            <section class="col-lg-4">
+              <img id="modalImage" class="modal-poster" alt="">
+            </section>
+            <section class="col-lg-8">
+              <section id="modalBadges" class="mb-3"></section>
+              <p id="modalSynopsis" class="modal-synopsis"></p>
+              <section id="modalMeta" class="row g-2"></section>
+              <section id="trailerWrap" class="trailer-wrap mt-4 d-none">
+                <section class="trailer-title">Tráiler / Promo</section>
+                <section class="ratio ratio-16x9">
+                  <iframe id="trailerFrame" src="" title="Tráiler del anime" allowfullscreen loading="lazy"></iframe>
+                </section>
+              </section>
+              <section id="trailerUnavailable" class="trailer-unavailable d-none mt-4">
+                <i class="bi bi-film"></i> Jikan no proporcionó un tráiler embebible para este título.
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

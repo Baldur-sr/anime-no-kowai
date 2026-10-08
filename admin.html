@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin · ANIME NO KOWAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="section-shell">
+  <main class="container">
+    <section class="d-flex justify-content-between align-items-center mb-4">
+      <section>
+        <span class="eyebrow">ETAPA 4 · BACK-END SIMULADO</span>
+        <h1 style="font-family:Cinzel;font-size:clamp(2.2rem,6vw,4rem);margin:0">Panel Admin</h1>
+      </section>
+      <a href="index.html" class="btn btn-outline-light"><i class="bi bi-arrow-left"></i> Volver</a>
+    </section>
+
+    <section id="loginPanel" class="nk-form mx-auto" style="max-width:480px">
+      <h2 class="mb-3" style="font-size:1.8rem">Acceso de demostración</h2>
+      <p class="muted-copy">Este login es exclusivamente académico y funciona en el navegador. No sustituye una autenticación real del servidor.</p>
+      <form id="loginForm" novalidate>
+        <section class="mb-3">
+          <label for="user" class="form-label">Usuario</label>
+          <input id="user" class="form-control" required value="admin">
+        </section>
+        <section class="mb-3">
+          <label for="pass" class="form-label">Contraseña</label>
+          <input id="pass" type="password" class="form-control" required placeholder="Contraseña de demo">
+        </section>
+        <button class="btn btn-danger w-100" type="submit"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</button>
+        <section id="loginFeedback" class="form-feedback mt-3" role="status"></section>
+      </form>
+    </section>
+
+    <section id="dashboard" class="d-none">
+      <section class="row g-3 mb-4">
+        <section class="col-md-4">
+          <section class="stat h-100">
+            <strong id="messageCount">0</strong>
+            <span>MENSAJES LOCALES</span>
+          </section>
+        </section>
+        <section class="col-md-4">
+          <section class="stat h-100">
+            <strong>JIKAN</strong>
+            <span>SERVICIO DE DATOS</span>
+          </section>
+        </section>
+        <section class="col-md-4">
+          <section class="stat h-100">
+            <strong>LOCAL</strong>
+            <span>ALMACENAMIENTO</span>
+          </section>
+        </section>
+      </section>
+      <section class="nk-form">
+        <section class="d-flex justify-content-between align-items-center mb-3">
+          <section>
+            <h2 style="font-size:1.7rem">Opiniones recibidas</h2>
+            <p class="muted-copy mb-0">Datos guardados en localStorage por el formulario público.</p>
+          </section>
+          <button id="logoutBtn" class="btn btn-outline-danger">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </button>
+        </section>
+        <section class="table-responsive">
+          <table class="table table-dark table-hover align-middle" id="messagesTable">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Anime</th>
+                <th>Opinión</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script>
+    const USER = 'admin';
+    const DEMO_PASSWORD = 'Anime2026!';
+    const sessionKey = 'animeNoKowaiAdminSession';
+    const loginPanel = document.getElementById('loginPanel');
+    const dashboard = document.getElementById('dashboard');
+    const feedback = document.getElementById('loginFeedback');
+
+    function showDashboard(){
+      loginPanel.classList.add('d-none');
+      dashboard.classList.remove('d-none');
+      const messages = JSON.parse(localStorage.getItem('animeNoKowaiMessages') || '[]');
+      document.getElementById('messageCount').textContent = messages.length;
+      const tbody = document.querySelector('#messagesTable tbody');
+      tbody.innerHTML = messages.length ? messages.slice().reverse().map(m => `<tr><td>${new Date(m.createdAt).toLocaleString('es-MX')}</td><td>${safe(m.name)}</td><td>${safe(m.favorite)}</td><td>${safe(m.message)}</td></tr>`).join('') : '<tr><td colspan="4" class="text-center text-secondary">No hay mensajes todavía.</td></tr>';
+    }
+    function safe(v=''){ return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;'); }
+    document.getElementById('loginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const user = document.getElementById('user').value.trim();
+      const pass = document.getElementById('pass').value;
+      if (user === USER && pass === DEMO_PASSWORD){
+        sessionStorage.setItem(sessionKey, '1');
+        showDashboard();
+      } else {
+        feedback.className = 'form-feedback mt-3 error';
+        feedback.textContent = 'Usuario o contraseña incorrectos.';
+      }
+    });
+    document.getElementById('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem(sessionKey); location.reload(); });
+    if(sessionStorage.getItem(sessionKey) === '1') showDashboard();
+  </script>
+</body>
+</html>
